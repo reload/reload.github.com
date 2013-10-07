@@ -374,6 +374,11 @@ Full-Width Styles
   background: #212121;
 }
 
+.byline {
+  color: #aaa;
+  font-size: 12px;
+  text-transform: uppercase;
+}
 
 /****************************
  * Main menu

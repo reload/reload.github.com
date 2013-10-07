@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="reload.github.com : Reload Pages on Github" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>reload.github.com</title>
+  </head>
+
+  <body>
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+    <header class="inner">
+      <a id="forkme_banner" href="https://github.com/reload">View on GitHub</a>
+
+      <h1 id="project_title">reload.github.com</h1>
+      <h2 id="project_tagline">Reload Pages on Github</h2>
+
+    </header>
+  </div>
+
+  <menu class="inner">
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a class="current" href="git-the-reload-way.html">Git the reload! way</a></li>
+      <li><a href="http://reload.dk">Reload.dk</a></li>
+    </ul>
+  </menu>
+
+
+  <!-- MAIN CONTENT -->
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      <h3 id="gitthereloadway.">Git the Reload! way.</h3>
+      <h4 id="git">Git</h4>
+
+      <p>Er du Mac bruger, så installer <a href="http://brew.sh/">Homebrew</a> og brug <code>brew</code> til at installere git. Ellers se <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">denne</a> side for installation på andre systemer.</p>
+
+      <pre><code>brew install git
+      </code></pre>
+
+      <p><a href="http://git-scm.com/docs/gittutorial">Denne tutorial</a> er et godt sted at starte, og hvis du skal bruge hjælp til en specifik kommando kan du altid bruge:</p>
+
+      <pre><code>git help &lt;command&gt;  
+      </code></pre>
+
+      <h4 id="git-flow">git-flow</h4>
+
+      <p><a href="https://github.com/nvie/gitflow">Git-flow</a> er en wrapper til normale git kommandoer. <code>git-flow</code> kan med andre ord ikke mere end <code>git</code>. Til gengæld sparer det dig tid ved at forkorte alle de trivielle arbejdsgange i <code>git</code>. </p>
+
+      <p>Git-flow kan installeres via homebrew (hvis du er på mac). Hvis du er på andet OS kan du finde hjælp <a href="https://github.com/nvie/gitflow/wiki/Installation">her</a>. </p>
+
+      <pre><code>brew install git-flow  
+      </code></pre>
+
+      <p>Få en video-introduktion <a href="http://vimeo.com/37408017">her</a>. </p>
+
+      <p>Du kan altid få hjælp til <code>git-flow</code> ved </p>
+
+      <pre><code>$&gt; git flow help
+  usage: git flow &lt;subcommand&gt;
+
+  Available subcommands are:
+     init      Initialize a new git repo with support for the branching model.
+     feature   Manage your feature branches.
+     release   Manage your release branches.
+     hotfix    Manage your hotfix branches.
+     support   Manage your support branches.
+     version   Shows version information.
+
+  Try 'git flow &lt;subcommand&gt; help' for details.
+      </code></pre>
+
+      <p>Herunder er beskrevet visuelt hvordan branching modellen ser ud i praksis. </p>
+
+      <figure>
+        <img src="http://nvie.com/img/2009/12/Screen-shot-2009-12-24-at-11.32.03.png" alt="image" />
+        <figcaption>image</figcaption></figure>
+
+      <h4 id="branches">Branches</h4>
+
+      <p>Hos Reload! ligger vores projekter på <a href="http://github.com">GitHub</a>. Vi har 5 forskellige branch-termer vi benytter os af: <code>feature</code>, <code>hotfix</code>, <code>release</code>, <code>develop</code> og <code>master</code>. </p>
+
+      <h3 id="developbranch">Develop branch</h3>
+
+      <p><code>Develop</code> branchen kan man sige er hovedbranchen, da den er et snapshot af<br/>
+      ændringerne der kommer med i næste release. Når <code>develop</code> branchen er stabil så<br/>
+      er den klar til at blive released, dette sker ved at lave en <code>release</code> branch og<br/>
+      få denne tagget med versionsnummer. </p>
+
+      <p>Der kan være tilfælde hvor man kan lave en lille ændring direkte på develop, men ikke som udgangspunkt.<br/>
+      <code>Develop</code> branchen kan direkte benyttes til at holde kunden opdateret på<br/>
+      fremdrift, ved at have en test server som bliver checket ud med nyeste snapshot<br/>
+      af <code>develop</code> branchen. </p>
+
+      <h3 id="masterbranch">Master branch</h3>
+
+      <p><code>master</code>-branchen er stable branch, og den branch der tagges med versionnummer. Det er også den branch som er findes på produktionsserveren - enten via HEAD, SHA eller specifikt tag.<br/>
+      <code>master</code>-branchen er den branch som merges ud fra når man starter en <code>hotfix</code>-branch. </p>
+
+      <h3 id="featurebranch">Feature branch</h3>
+      <div style='float:left;'> <img src='http://nvie.com/img/2009/12/fb.png'> </div>
+
+      <p>En <code>feature</code> branch benyttes til at udvikle en ny feature til et projekt (surprise), en <code>feature</code> er <em>ikke</em> en kritisk ændring af koden, som ikke kan vente til ny release.<br/>
+      I <code>git-flow</code>-terminologien er en <code>feature</code>-branch blot en branch som oprettes på baggrund af <code>develop</code>-branchen. Når <code>feature</code>-branchen er klar, så pushes den til github hvor der oprettes en Pull request.</p>
+
+      <pre><code>git flow feature start &lt;feature_navn&gt;
+      </code></pre>
+
+      <p>Vil give outputtet</p>
+
+      <pre><code>$&gt; git flow feature start reload-1337
+  Switched to a new branch 'feature/reload-1337'
+
+  Summary of actions:
+  - A new branch 'feature/reload-1337' was created, based on 'develop'
+  - You are now on branch 'feature/reload-1337'
+
+  Now, start committing on your feature. When done, use:
+
+   git flow feature finish reload-1337
+      </code></pre>
+
+      <p><code>Git-flow</code> skriver altid hvad der sker når du eksekverer en kommando, så på den måde ved man også lidt om hvad der foregår af magi. </p>
+
+      <p>I dette tilfælde vil det altså sige, når du &#8220;starter&#8221; en <code>feature</code>-branch, så branches der ud fra <code>develop</code>, og oprettes en branch med navnet feature/&lt;feature_navn&gt;. &lt;feature_navn&gt; er blot en beskrivende tekst på engelsk for hvad er det for en feature. Vi benytter os ofte af at kalde vore features ticket navn fra Jira ticket system, evt med en kort beskrivelse ex. </p>
+
+      <ul>
+        <li>RELOAD&#8211;1337</li>
+        <li>IDA-new-logo&#8211;138</li>
+      </ul>
+
+      <p>Hvorved der oprettes en branch med navnet <code>feature/RELOAD-1337</code></p>
+
+      <p>Når du vil pushe din nye <code>feature</code> til GitHub:</p>
+
+      <pre><code>git flow feature publish &lt;feature_navn&gt;
+      </code></pre>
+
+      <p>Vil give outputtet</p>
+
+      <pre><code>$ git flow feature publish reload-1337
+  Total 0 (delta 0), reused 0 (delta 0)
+  To git@github.com:reload/FDB-Madsite.git
+   * [new branch]      feature/reload-1337 -&gt; feature/reload-1337
+  Already on 'feature/reload-1337'
+
+  Summary of actions:
+  - A new remote branch 'feature/reload-1337' was created
+  - The local branch 'feature/reload-1337' was configured to track the remote branch
+  - You are now on branch 'feature/reload-1337'
+      </code></pre>
+
+      <p>Denne kommando pusher <code>feature</code>-branchen til GitHub, uden at den bliver merged ind i nogen eksisterende branch. </p>
+
+      <blockquote>
+        <p>Her afviger vi fra normal <code>git-flow</code> procedure. </p>
+      </blockquote>
+
+      <p>Herefter opretter man på GitHub en Pull Request som en anden person hos Reload! skal reviewe og teste.<br/>
+      Når Reload! har testet og sagt god for featuren, så er næste step at få merged pull requesten ind i <code>develop</code> ved trykkes der på <strong>Merge Pull Request</strong> på GitHub, og GitHub merger automatisk <code>featuren</code> ind i <code>develop</code>-branchen. (Se evt <a href="#pullrequests">Pull Requests</a>) </p>
+
+      <p>Så en <code>feature</code>-branch afsluttes i praksis aldrig. Du skal blot selv sørge for at slette din <code>feature</code>-branch lokalt. Dette kunne gøres ved:</p>
+
+      <pre><code>git checkout develop
+  git branch -d &lt;feature_navn&gt;  
+      </code></pre>
+
+      <h3 id="hotfixbranch">Hotfix branch</h3>
+
+      <figure>
+        <img src="http://nvie.com/img/2010/01/hotfix-branches1.png" alt="image" />
+        <figcaption>image</figcaption></figure>
+
+      <p>Et <em>hotfix</em> er en rettelse der laves direkte til <code>master</code> dvs. produktionsmiljøet, og benyttes kun til at rette kritiske fejl på en eksisterende løsning, som skal løses ASAP, dvs det kan ikke vente til der bliver released en ny version.<br/>
+      <a href="#versionsnummering">Versionsnumre</a> der benyttes til angivelse af en <code>hotfix</code> er i formatet x.y.z eks. <code>1.3.37</code> hvis der har været 37 hotfixes til 1.3.</p>
+
+      <pre><code>git flow hotfix start &lt;versions-nummer&gt;
+  git flow hotfix finish &lt;versions-nummer&gt;
+      </code></pre>
+
+      <p>Sidste parameter til <code>git flow hotfix</code>-kommandoen er det tag/versionsnummer som <code>master</code>-branchens commit bliver tagget med, når <code>hotfix</code>-branchen bliver merged tilbage ind i <code>master</code>.</p>
+
+      <pre><code>git push origin develop master &lt;versions-nummer&gt;
+      </code></pre>
+
+      <p>Igen for <code>hotfix</code> branches er det også gældende som for <code>feature</code> branches, nemlig at der i de fleste tilfælde bør oprettes en pull request så koden kan blive godkendt inden en endenlig ny version pushes til produktion, her skal det huskes at pull requesten skal være mellem din <code>hotfix</code> og <code>master</code> branches. </p>
+
+      <p>En <code>hotfix</code> kan checkes ud på et pre-prod/staging miljø, som more or less er en afspejling af produktion, og blive testet inden en endelig merging til <code>master</code>. </p>
+
+      <h3 id="releasebranch">Release branch</h3>
+
+      <p>En release branch brancher ud fra <code>HEAD</code> af <code>develop</code> branchen, som bliver tagget med<br/>
+      et <a href="#versionsnummering">versionsnummer</a>.</p>
+
+      <pre><code>git flow release start &lt;versions-nummer&gt;
+  git flow release finish &lt;versions-nummer&gt;
+      </code></pre>
+
+      <p>En <code>release</code> branch er sidste skridt inden ændringerne når produktionsmiljøet, og er den branch der checkes ud på et demo/staging/pre-prod miljø, som kunden kan teste inden <code>release</code>branchen afsluttes og er klar til at blive checket ud på produktions serveren. </p>
+
+      <p>Hvis kunden har nogle sidste fejlrettelser på falderebet inden det lægges i produktion, så kan det blive rettet i denne branch. Det kunne ligeledes være et versionsnummer der skal opdateres i en make fil, en CHANGELOG der skal opdateres eller lignende.<br/>
+      Når det hele er rettet og alt er klar til lancering af ny version af projektet, så afslutter du branchen, og publiserer denne. Hvorved <code>develop</code> og <code>master</code> bliver opdateret, og nyt tag <versions-nummer> bliver oprettet. </p>
+
+      <h4 id="afvigelserfraoriginalgit-flow">Afvigelser fra original git-flow</h4>
+
+      <p>I og med vi benytter os af <a href="#pullrequests">pull requests</a>, så afviger vi der fra <code>git-flow</code> fordi vi faktisk <em>aldrig</em> afslutter en branch, da dette er håndteret af GitHub at få merged ind. </p>
+
+      <p>Så kommandoerne <code>git flow [feature|hotfix|release] finish &lt;name&gt;</code> bliver på normalvis aldrig eksekveret. Og det er derfor din egen opgave at rydde op i dit lokale projekt, da alle branches stadig vil være tilgængelige. </p>
+
+      <p>Med <code>git branch</code> får du vist alle lokale branches</p>
+
+      <pre><code>$&gt; git branch
+     develop
+     feature/FDBOUT-366
+   * feature/searchengine_update
+     feature/v20
+     master
+      </code></pre>
+
+      <p>Og du kan slette en branch du ikke har checket ud (her vist med *)</p>
+
+      <pre><code>git branch -d &lt;branch-name&gt;
+
+  $&gt; git branch -d feature/FDBOUT-366
+  Deleted branch feature/FDBOUT-366 (was 42b2ebc).  
+      </code></pre>
+
+      <h4 id="versionsnummering">Versionsnummering</h4>
+
+      <p>Release og hotfixes bliver altid tagget med et <versions-nummer>, og vi bruger retningslinierne fra <a href="http://semver.org/">Semantic Versioning</a>. For lige at opsummere lidt, så er et versionsnummer af formatet X.Y.Z. </p>
+
+      <p>Patch version x.y.Z benyttes til hotfixes/fejlrettelser<br/>
+      Minor version x.Y.z benyttes når ny funktionalitet tilføjes projektet.<br/>
+      Major version X.y.z benyttes oftest hvis projektet refactoreres, dvs ny kodebase, eller nyt design, dvs. store visuelle eller programatiske ændringer. </p>
+
+      <p>På nye projekter bør man arbejde på versionsnumre <code>0.y.z</code>, og når projektet er klar til release/lancering, så tagges versionen med <code>1.0</code>. </p>
+
+      <p>Så versionsnumre vil kunne se således ud. </p>
+
+      <ul>
+        <li><code>1.0</code></li>
+        <li><code>1.3.37</code></li>
+        <li><code>2.1</code></li>
+        <li><code>2.1.33</code></li>
+      </ul>
+
+      <p>Men <em>aldrig</em> </p>
+
+      <ul>
+        <li><code>1</code></li>
+        <li><code>1.0.0</code></li>
+        <li><code>1.3.37.0</code></li>
+      </ul>
+
+      <h4 id="githubpullrequests">Github Pull Requests</h4>
+
+      <p>En Pull request giver mulighed for at få godkendt din kode inden den merges ind i den ønskede branch (dette angives når man opretter pull requesten).<br/>
+      Dette sker ved at man får en anden til at kigge ens kode igennem for fejl i forhold til standarder. Men også ved at checke koden ud på sit lokale udviklings miljø og checke at den ønskede funktionalitet der er beskrevet opnås.<br/>
+      Hvis dette ikke skulle være tilfældet, så kommenteres der direkte på pull request siden på GitHub. Ændringer der bliver lavet til den branch der indeholder ny kode, pushes til GitHub og pull requesten opdateres automatisk med alle ædringer til branchen. </p>
+
+      <p>Håndtering af pull requests sker på GitHub efter at branchen er pushet derop, og man kan oprette ny pull request. Dette gøres på normalvis direkte i browser på Github.<br/>
+      Det er lidt omstændigt, men der findes endnu et lille tool, <a href="http://defunkt.io/hub/">Hub</a> der kan hjælpe med dette (udover en masse andre fikse git-relaterede shortcuts).</p>
+
+      <pre><code>brew install hub  
+      </code></pre>
+
+      <p>Med hjælp fra GitHub&#8217;s API kan <a href="http://defunkt.io/hub/">Hub</a> oprette en pull-request på baggrund af forskellen mellem den branch der er checket ud (og pushed) og eksempelvis <code>develop</code>-branchen.</p>
+
+      <pre><code>hub pull-request -b develop
+      </code></pre>
+
+      <p>Resultatet af denne kommando er en url til selve pull-requesten der bliver udskrevet i din kommandolinie.</p>
+
+      <div class="byline">Af: Hasse Ramlev Hansen <a
+          href="mailto:hasse@reload.dk">&lt;hasse@reload.dk&gt;</a></div>
+    </section>
+  </div>
+
+  <!-- FOOTER  -->
+  <div id="footer_wrap" class="outer">
+    <footer class="inner">
+      <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+    </footer>
+  </div>
+
+  <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-15751550-1");
+    pageTracker._trackPageview();
+  } catch(err) {}
+  </script>
+
+
+  </body>
+  </html>

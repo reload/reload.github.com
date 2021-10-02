@@ -46,11 +46,13 @@ div#avatar img {
   width: 80%;
 }
 
-div#votes {
+div#votes p.votes {
+  font-style: italic;
+  font-size: 180%;
+  font-family: Bitter;
 }
 
 div#content {
   display: flex;
 }
-}
-  }
+

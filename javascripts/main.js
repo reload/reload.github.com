@@ -14,6 +14,8 @@ async function loadData(url, headerid, contentid) {
 
         strContent += '<div id="avatar"><img src="'+ json.avatar_url + '" /></div>';
         strContent += '<div id="votes">';
+        strContent += '<h2>Hvad kollegerne er glade for:</h2>';
+
 
 		Object.entries(json.votes).forEach((entry) => {
 		  const [key, value] = entry;

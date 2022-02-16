@@ -25,7 +25,30 @@
         <div id="content">Fetching the latest Karma King...</div>
 
         <script>
-            loadData("https://europe-west1-karma-26309.cloudfunctions.net/latestKing","header#header","div#content");
+          fetch("https://europe-west1-karma-26309.cloudfunctions.net/latestKings")
+          .then((response) => response.json())
+          .then(kings => {
+              if(!kings || kings.length === 0) {
+                document.getElementById("content").innerHTML = "<h1> Ingen karma konge er nomineret i denne uge 🥺</h1>";
+                return
+              }
+
+              let currentIndex = 0
+              if(kings[currentIndex]) {
+                renderKing(kings[currentIndex], "header#header","div#content")
+              }
+
+              setInterval(() => {
+                currentIndex = kings[currentIndex + 1] ? currentIndex + 1 : 0
+
+                const currentKing = kings[currentIndex]
+                renderKing(currentKing, "header#header","div#content")
+                }, 8000)
+            })
+            .catch(err => {
+              console.log("Failed to fetch kings ", err)
+            })
+          
         </script>
 
     </section>

@@ -4,6 +4,7 @@ Full-Width Styles
 
 body, #main_content_wrap {
   background: #fff;
+  border: 0px;
 }
 
 .outer {
@@ -54,5 +55,9 @@ div#votes p.votes {
 
 div#content {
   display: flex;
+}
+
+h2 {
+  background: none;
 }
 

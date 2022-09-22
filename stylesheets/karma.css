@@ -20,6 +20,7 @@ body, #main_content_wrap {
 
 #header_wrap {
   background: #FFF;
+  margin-top: 70px;
 }
 
 #header_wrap .inner {

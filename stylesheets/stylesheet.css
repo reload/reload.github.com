@@ -60,7 +60,7 @@ body {
   color:#373737;
   background: #0E223B;
   font-size: 16px;
-  font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  font-family: 'Space Grotesk', Helvetica, Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -69,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 10px 0;
   font-weight: 700;
   color:#222222;
-  font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+  font-family: 'Space Grotesk', Helvetica, Arial, sans-serif;
   letter-spacing: -1px;
 }
 
@@ -204,13 +204,15 @@ ul, ol, dl {
 }
 
 ul li {
-  list-style: inside;
-  padding-left: 20px;
+  list-style: outside;
+  padding-left: 10px;
+  margin-left: 30px;
 }
 
 ol li {
-  list-style: decimal inside;
-  padding-left: 20px;
+  list-style: decimal outside;
+  padding-left: 10px;
+  margin-left: 30px;
 }
 
 dl dt {
@@ -293,12 +295,7 @@ Full-Width Styles
 }
 
 #header_wrap {
-  background: #0E223B;
-  background: -moz-linear-gradient(top, #0b3f7d, #0E223B);
-  background: -webkit-linear-gradient(top, #0b3f7d, #0E223B);
-  background: -ms-linear-gradient(top, #0b3f7d, #0E223B);
-  background: -o-linear-gradient(top, #0b3f7d, #0E223B);
-  background: linear-gradient(top, #0b3f7d, #0E223B);
+  background: #000;
 }
 
 #header_wrap .inner {
@@ -418,8 +415,8 @@ menu.inner ul li a {
   height: 28px;
 }
 menu.inner ul li a:hover, menu.inner ul li a.current {
-  color: #fff;
-  background-color: rgba(255, 192, 3, 1);
+  color: #000;
+  background-color: #ffe44e;
   border-radius: 15px 15px 0 0;
   transition: background-color 200ms linear;
 }
